@@ -1,7 +1,3 @@
-
-// feedback-form-state
-
-// import throttle = require("lodash.throttle");
 let throttle = require('lodash.throttle');
 
 

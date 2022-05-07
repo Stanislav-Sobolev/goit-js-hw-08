@@ -37,17 +37,6 @@ if(event.target.nodeName !== "IMG") {
 }
 
 
-// lightbox.on('show.simplelightbox', function () {
-// 	console.log("object");
-// });
-
-// const instance = basicLightbox.create(`
-//     <img src="${event.target.dataset.source}">
-// `)
-
-// instance.show();
-
-
 window.document.addEventListener("keydown", setModalListener);
 
 function setModalListener (e) {
