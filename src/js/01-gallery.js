@@ -7,45 +7,25 @@ import "simplelightbox/dist/simple-lightbox.min.css";
 // Change code below this line
 
 
-const galleryContainer = document.querySelector("div.gallery");
-
+const galleryContainer = document.querySelector(".gallery");
 
 const previewGalleryList = galleryItems.map( ({preview, original, description}) => {
     
- return `<div class="gallery__item">
-<a class="gallery__link" href="${original}">
-  <img
-    class="gallery__image"
-    src="${preview}"
-    data-source="${original}"
-    alt="${description}"
-  />
-</a>
-</div>`
+ return `<a class="gallery__item" href="${original}">
+ <img class="gallery__image" src="${preview}" alt="${description}" data-source="${original}"/>
+</a>`
 }).join("");
 
-galleryContainer.insertAdjacentHTML("beforeend", previewGalleryList)
+galleryContainer.insertAdjacentHTML("beforeend", previewGalleryList);
 
-galleryContainer.addEventListener("click", getBigImageUrl)
+galleryContainer.addEventListener("click", clickToImg);
 
-let lightbox = new SimpleLightbox('.gallery__link');
+function clickToImg (event) {
+    event.preventDefault()
+  if(event.target.nodeName !== "IMG") {
+    return;
+  }
+};
 
-function getBigImageUrl (event) {
-  event.preventDefault()
-if(event.target.nodeName !== "IMG") {
-  return;
-}
-
-
-window.document.addEventListener("keydown", setModalListener);
-
-function setModalListener (e) {
-  console.dir(e.code)
-  if(e.code === "Escape"){
-    instance.close()
-    removeCloseListener()
-}
-
-function removeCloseListener () {
-  window.document.removeEventListener("keydown", setModalListener)
-}}}
+const lightbox = new SimpleLightbox('.gallery__item', 
+{captionsData: "alt", captionDelay: 250,});
